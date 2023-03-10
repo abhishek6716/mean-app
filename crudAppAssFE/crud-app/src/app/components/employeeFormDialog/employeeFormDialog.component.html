@@ -1,0 +1,46 @@
+<h1 mat-dialog-title align="center">Add Employee</h1>
+<mat-dialog-content class="mat-typography">
+  <form class="example-form">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Employee Name</mat-label>
+      <input matInput placeholder="Employee Name" value="Abhi">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Date Of Birth</mat-label>
+      <input matInput [matDatepicker]="picker">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Department</mat-label>
+      <mat-select matNativeControl required>
+        <mat-option value="IT">IT</mat-option>
+        <mat-option value="HR">HR</mat-option>
+        <mat-option value="Tech">Tech</mat-option>
+        <mat-option value="Admin">Admin</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Skills</mat-label>
+      <mat-select multiple>
+        <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" placeholder="Enter Email" value="Abhi">
+    </mat-form-field>
+
+    <label>Attach Photo</label>
+    <input type="file"/>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-raised-button mat-dialog-close color="primary">Submit</button>
+  <button mat-raised-button mat-dialog-close color="warn">Close</button>
+</mat-dialog-actions>
