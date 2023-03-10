@@ -1,10 +1,10 @@
 .main-div{
   text-align: center;
-  margin-top: 5rem;
-  margin-left: 5rem;
-  margin-right: 5rem;
+  padding-top: 5rem;
+  padding-left: 5rem;
+  padding-right: 5rem;
 }
 
 .table-div{
-  margin-top: 3rem;
+  padding-top: 3rem;
 }
