@@ -25,12 +25,17 @@ const upload = multer({
 
 // Handle POST requests to add a new employee
 router.post('/employees', upload.single('photo'), async (req, res) => {
-    let { name, dateOfBirth, department, skills, email } = req.body;
-    skills = JSON.parse(skills);
-    const photo = req.file.filename;
-    const employee = new Employee({ name, dateOfBirth, department, skills, email, photo });
-    await employee.save();
-    res.send(employee);
+    try {
+        let { name, dateOfBirth, department, skills, email } = req.body;
+        skills = JSON.parse(skills);
+        console.log(req.file);
+        const photo = req.file.filename;
+        const employee = new Employee({ name, dateOfBirth, department, skills, email, photo });
+        await employee.save();
+        res.status(201).send(employee);
+    } catch (error) {
+        res.status(400).send(error);
+    }
 });
 
 

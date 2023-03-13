@@ -1,6 +1,7 @@
 .example-form{
   display: flex;
   flex-direction: column;
+  gap: 2em;
 }
 
 .example-full-width {

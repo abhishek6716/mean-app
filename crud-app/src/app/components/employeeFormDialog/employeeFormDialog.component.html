@@ -1,46 +1,58 @@
-<h1 mat-dialog-title align="center">Add Employee</h1>
+<div>
+  <h1 mat-dialog-title align="center">Add Employee</h1>
+  <h6 align="center" style="margin-top: -20px; margin-bottom: 20px;">(Employee Code)</h6>
+</div>
 <mat-dialog-content class="mat-typography">
-  <form class="example-form">
-    <mat-form-field class="example-full-width" appearance="fill">
+  <form class="example-form" [formGroup]="employeeForm">
+    <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Employee Name</mat-label>
-      <input matInput placeholder="Employee Name" value="Abhi">
+      <input matInput required placeholder="Employee Name" name="name" formControlName="name">
+      <mat-error>{{ 'Employee name is required!' }}</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Date Of Birth</mat-label>
-      <input matInput [matDatepicker]="picker">
+      <input matInput required [matDatepicker]="picker" name="dateOfBirth" formControlName="dateOfBirth">
       <mat-hint>MM/DD/YYYY</mat-hint>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
+      <mat-error>{{ 'Date of birth is required!' }}</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Department</mat-label>
-      <mat-select matNativeControl required>
-        <mat-option value="IT">IT</mat-option>
-        <mat-option value="HR">HR</mat-option>
-        <mat-option value="Tech">Tech</mat-option>
-        <mat-option value="Admin">Admin</mat-option>
+      <mat-select matNativeControl required name="department" formControlName="department">
+        <mat-option *ngFor="let department of departmentList" [value]="department">{{department}}</mat-option>
       </mat-select>
+      <mat-error>{{ 'Department is required!' }}</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Skills</mat-label>
-      <mat-select multiple>
-        <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option>
+      <mat-select multiple required name="skills" formControlName="skills">
+        <mat-option *ngFor="let skill of skillsList" [value]="skill">{{skill}}</mat-option>
       </mat-select>
+      <mat-error>{{ 'Skills are required!' }}</mat-error>
     </mat-form-field>
 
-    <mat-form-field class="example-full-width" appearance="fill">
+    <mat-form-field class="example-full-width" appearance="outline">
       <mat-label>Email</mat-label>
-      <input matInput type="email" placeholder="Enter Email" value="Abhi">
+      <input matInput required type="email" placeholder="Enter Email" name="email" formControlName="email">
+      <mat-error>{{ 'Email is required required!' }}</mat-error>
     </mat-form-field>
 
-    <label>Attach Photo</label>
-    <input type="file"/>
+    <div style="display: flex; flex-direction: column;">
+      <div>
+        <label>Attach Photo</label>
+      </div>
+      <div style="padding-top: 2%; padding-bottom: 2%;">
+        <input type="file" required name="photo" (change)="onFileSelected($event)">
+        <!-- <input #attachmentInput type="file" required name="photo" (change)="chooseFile(attachmentInput.files)" formControlName="photo"/> -->
+      </div>
+    </div>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions align="center">
-  <button mat-raised-button mat-dialog-close color="primary">Submit</button>
+  <button mat-raised-button color="primary" type="submit" (click)="saveEmployeeDetails()">Submit</button>
   <button mat-raised-button mat-dialog-close color="warn">Close</button>
 </mat-dialog-actions>

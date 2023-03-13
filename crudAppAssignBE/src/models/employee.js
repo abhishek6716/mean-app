@@ -26,8 +26,8 @@ const employeeSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        unique: true,
         required: true,
+        unique: true,
         trim: true,
         validate(value) {
             if (!validator.isEmail(value)) {
@@ -36,7 +36,7 @@ const employeeSchema = new mongoose.Schema({
         }
     },
     photo: {
-        type: Buffer,
+        type: String,
         required: true,
     }
 });
